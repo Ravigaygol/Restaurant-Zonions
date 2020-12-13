@@ -28,9 +28,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
@@ -124,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "Zonions"
+  "defaultProject": "Zonions",
+  "cli": {
+    "analytics": "4fe421e7-1556-4804-b917-2a9361fd283c"
+  }
 }
