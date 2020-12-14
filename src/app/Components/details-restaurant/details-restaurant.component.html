@@ -1,0 +1,55 @@
+<!-- <h2>Restaurant Details</h2> 
+
+<hr/>
+<div *ngIf="restaurant">
+  <div>
+    <label><b>Restaurant Name: </b></label> {{restaurant.restname}}
+  </div>
+  <div>
+    <label><b> Restaurant Address: </b></label> {{restaurant.restaddress}}
+  </div>
+  <div>
+    <label><b> Restaurant Open Time: </b></label> {{restaurant.openTime}}
+  </div>
+  <div>
+    <label><b> Restaurant Close Time: </b></label> {{restaurant.closeTime}}
+  </div>
+  <div>
+    <label><b>Restaurant Phone: </b></label> {{restaurant.restphone}}
+  </div>  
+   <div>
+    <label><b>Restaurant Menu : <img [src]="imagePath" style="height: 150px; width: 150px;"></b></label>
+  </div>
+</div>
+ -->
+ <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Restaurant Details</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr class="danger">
+            <th>Restaurant Name</th>
+            <th>Restaurant Address</th>
+            <th>Restaurant Contact Number</th>
+            <th>Restaurant Open Time</th>
+            <th>Restaurant Close Time</th>
+            <th>Restaurant Menu</th>
+          </tr>
+        </thead>
+        <tbody>
+  <!--         <tr *ngFor="let rest of restaurant | async">-->
+              <td>{{restaurant.restname}}</td>
+            <td>{{restaurant.restaddress}}</td>
+            <td>{{restaurant.restphone}}</td>
+            <td>{{restaurant.openTime}}</td>
+            <td>{{restaurant.closeTime}}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <br>
+  <br>
+  <button (click)="list()" class="btn btn-primary">Back to Restaurant List</button><br>

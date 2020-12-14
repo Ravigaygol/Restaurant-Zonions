@@ -1,0 +1,23 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Restaurant List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table" >
+        <thead>
+          <tr class="danger">
+            <th  style="font-size: 20px;"><u>Restaurant Name</u></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rest of restaurants | async">
+            <td style="font:bolder;font-size: 20px;background-color: rgb(236, 234, 231);">{{rest.restname}}</td>
+            <td>
+                <button (click)="restaurantDetails(rest.restid)" class="btn btn-info" style="margin-left: 400px">Restaurant Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

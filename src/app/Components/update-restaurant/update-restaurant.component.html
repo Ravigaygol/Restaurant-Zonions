@@ -1,1 +1,72 @@
-<p>update-restaurant works!</p>
+<h3>Update Restaurant</h3>
+<div class="container">
+    <form #Updateform="ngForm" (ngSubmit)="onSubmit()">
+        <!--        {{Registerform.form.valid}}-->
+        <div class="form-group">
+            <label for="restid">Restaurant id:</label>
+            <input type="number" class="form-control" placeholder="Enter Restaurant id" name="restID"
+                [(ngModel)]="restaurant.restid" required required #restoid="ngModel"
+                [class.is-invalid]="restoid.invalid && restoid.touched">
+            <div *ngIf="restoid.errors && restoid.invalid && restoid.touched">
+                <small class="text-danger" *ngIf="restoid.errors.required">Restaurant ID is Required field</small>
+            </div>
+        </div>
+        <div>
+            <label for="restname"><span style="color: red;">*</span>Restaurant name:</label>
+            <input type="text" class="form-control" placeholder="Enter Restaurant name" name="restnm"
+                [(ngModel)]="restaurant.restname" required pattern="[A-Za-z0-9]+" required #restoname="ngModel"
+                [class.is-invalid]="restoname.invalid && restoname.touched">
+            <div *ngIf="restoname.errors && restoname.invalid && restoname.touched">
+                <small class="text-danger" *ngIf="restoname.errors.required">Restaurant name is Required field</small>
+                <small class="text-danger" *ngIf="restoname.errors.pattern">Special Characters Not Allowed Please Enter
+                    Correct Restaurantname</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="restaddress"><span style="color: red;">*</span>Restaurant Address:</label>
+            <textarea class="form-control" name="Addr" required #restoaddress="ngModel"
+                [(ngModel)]="restaurant.restaddress" placeholder="Enter Restaurant address"
+                [class.is-invalid]="restoaddress.invalid && restoaddress.touched"></textarea>
+            <div *ngIf="restoaddress.errors && restoaddress.invalid && restoaddress.touched">
+                <small class="text-danger" *ngIf="restoaddress.errors.required">Restaurant Address is Required
+                    field</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="restphone"><span style="color: red;">*</span>Restaurant Phone Number:</label>
+            <input type="text" class="form-control" placeholder="Enter Restaurant Number" name="restph"
+                [(ngModel)]="restaurant.restphone" required pattern="[789][0-9]{10}" required #restophone="ngModel"
+                [class.is-invalid]="restophone.invalid && restophone.touched">
+            <div *ngIf="restophone.errors && restophone.invalid && restophone.touched">
+                <small class="text-danger" *ngIf="restophone.errors.required">Restaurant Number is Required
+                    field</small>
+                <small class="text-danger" *ngIf="restophone.errors.pattern">Only 10 Digits Allowed It Should Start With
+                    Digit(7/8/9) Please Correct valid Restaurant Number</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="openTime"><span style="color: red;">*</span>Timing for opening of Restaurant:</label>
+            <input type="time" id="appt" name="appt" min="9:00" max="18:00" [(ngModel)]="restaurant.openTime">
+            <hr>
+        </div>
+        <div class="form-group">
+            <label for="closeTime"><span style="color: red;">*</span>Timing for closing of Restaurant:</label>
+            <input type="time" id="appt" name="appt" min="9:00" max="18:00" [(ngModel)]="restaurant.closeTime">
+            <hr>
+        </div>
+        <div class="form-group">
+            <label for="lastModified"><span style="color: red;">*</span>Last Modified Time:</label>
+            <input type="time" name="lastModified" [(ngModel)]="restaurant.lastModified">
+        </div>
+        <div class="form-group">
+            <label for="active"><span style="color: red;">*</span>Restaurant Status :-</label>
+            <label><input type=checkbox name=active [(ngModel)]="restaurant.active"> Active</label>
+        </div>
+        <button [disabled]="Updateform.form.invalid" type="submit" class="btn btn-info">Update</button>
+    </form>
+    
+</div>
+<div>
+    Form Value: <br>
+    {{Updateform.value | json}}
+</div>
