@@ -10,43 +10,49 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./update-restaurant.component.css']
 })
 export class UpdateRestaurantComponent implements OnInit {
-  restid:number;
-  restaurant:Restaurant;
-  constructor(private route: ActivatedRoute,private router: Router,
-    private restaurantService:RestaurantService,private httpClient: HttpClient,) { }
-    
-    message: string;
-    file:any;
-    private uploadUrl='http://localhost:8080/upload';
+  restid: number;
+  restaurant: Restaurant;
+  displayURL = "http://localhost:8080/get";
+  imagePath: any;
+  message: string;
+  selectedFile: any;
 
+  constructor(private route: ActivatedRoute, private router: Router,
+    private restaurantService: RestaurantService, private httpClient: HttpClient) { }
+
+  UploadMenu() {
+    console.log("In onUpload " + this.selectedFile + "selected rest id :" + this.restid);
+    this.restaurantService.UploadFileFromService(this.selectedFile, this.restid).subscribe((resp: any) => {
+      if (resp.status === 200) {
+        this.message = 'Image uploaded successfully';
+      } else {
+        this.message = 'Image not uploaded successfully';
+      }
+    }
+    );
+  }
+  public ChooseFile(selectedFile: any) {
+    this.selectedFile = selectedFile;
+  }
   ngOnInit() {
-    this.restaurant=new Restaurant();
-
+    this.restaurant = new Restaurant();
     this.restid = this.route.snapshot.params['restid'];
-    console.log("ONNNN Update Rest iddddd:"+this.restid);
-    this.restaurantService.getRestaurant(this.restid)
+    this.restaurantService.getRestaurantById(this.restid)
       .subscribe(data => {
-        console.log(data)
         this.restaurant = data;
+        this.imagePath = `${this.displayURL}/${this.restaurant.restid}/${this.restaurant.name}`;
       }, error => console.log(error));
   }
 
-  updateRestaurant() {
-    
+  updateRestaurant() {  /* Method call from update restaurant form to update the restaurant*/
     this.restaurantService.updateRestaurant(this.restid, this.restaurant)
       .subscribe(data => {
-        console.log(data);
-        console.log("Update component restid :"+this.restid);
         this.restaurant = new Restaurant();
-        this.gotoList();
+        this.restaurantList();
       }, error => console.log(error));
   }
 
-  onSubmit() {
-    this.updateRestaurant();    
-  }
-
-  gotoList() {
+  restaurantList() {  /* Method to display all the restaurant again to admin after successfully updated restaurant */
     this.router.navigate(['restaurant']);
   }
 

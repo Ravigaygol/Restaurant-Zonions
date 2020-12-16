@@ -12,26 +12,27 @@ import { Observable } from 'rxjs';
 })
 export class DetailsRestaurantComponent implements OnInit {
 
-  restid:number;
+  restid: number;
   restaurants: Observable<Restaurant[]>;
   restaurant: Restaurant;
-  constructor(private route: ActivatedRoute,private router: Router,
-    private restaurantService: RestaurantService,private httpClient: HttpClient) { }
+  fileURL = "http://localhost:8080/get";     /* <---URL comes from rest api to display the uploaded menu */
+  imagePath: any;
+
+  constructor(private route: ActivatedRoute, private router: Router,
+    private restaurantService: RestaurantService, private httpClient: HttpClient) { }
+
   ngOnInit() {
     this.restaurant = new Restaurant();
-
     this.restid = this.route.snapshot.params['restid'];
-    console.log("In Details Reeeeesssst id"+this.restid);
-    this.restaurantService.getRestaurant(this.restid)
+    this.restaurantService.getRestaurantById(this.restid)
       .subscribe(data => {
-        console.log(data)
-        console.log("Reeeeesssst id"+this.restid)
         this.restaurant = data;
+        this.imagePath = `${this.fileURL}/${this.restaurant.restid}/${this.restaurant.name}`;
       }, error => console.log(error)
       );
-}
+  }
 
-  list(){
+  list() {                             /* <---Method call from details Form for come back to Homepage */
     this.router.navigate(['default']);
   }
 

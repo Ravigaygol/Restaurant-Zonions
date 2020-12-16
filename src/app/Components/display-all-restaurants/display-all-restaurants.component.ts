@@ -12,41 +12,40 @@ import { RestaurantService } from 'src/app/Services/restaurant.service';
   styleUrls: ['./display-all-restaurants.component.css']
 })
 export class DisplayAllRestaurantsComponent implements OnInit {
-  Admin =new Admin();
+  Admin = new Admin();
   restaurants: Observable<Restaurant[]>;
-  rest=new Restaurant();
+  rest = new Restaurant();
+
   constructor(private restaurantService: RestaurantService,
-    private router: Router,private httpClient: HttpClient) {}
-   
+    private router: Router, private httpClient: HttpClient) { }
+
   ngOnInit() {
-    this.reloadData();
+    this.refreshRestaurants();
   }
 
-  reloadData() {
+  refreshRestaurants() {                                   /* <---Method to Diplay all the Restaurants list again to admin */
     this.restaurants = this.restaurantService.getAllRestaurant();
   }
 
-  deleteRestaurant(restid: number) {
-    console.log("Delete restid :"+restid)
+  deleteRestaurant(restid: number) {                      /* <---Method call from Display List Form to Delete Restaurant */
     this.restaurantService.deleteRestaurant(restid)
       .subscribe(
         data => {
-          console.log(data);
-          this.reloadData(); 
+          this.refreshRestaurants();
         },
-        error => console.log(error)); 
+        error => console.log(error));
   }
-  updateRestaurant(restid: number){
-    console.log("Update restID :"+restid);
+
+  updateRestaurant(restid: number) {                     /* <---Method call from Display List Form to Update Restaurant */
     this.router.navigate(['restUpdate', restid]);
   }
-  createRestaurant(restaurant:Restaurant){
-    console.log("Restaurant Obbject :"+restaurant);
+
+  createRestaurant(restaurant: Restaurant) {             /* <---Method call from Display List Form to Create Restaurant */
     this.router.navigate(['add', restaurant]);
   }
-  list(){
+
+  list() {                                               /* <---Method for come back to the Homepage */
     this.router.navigate(['default']);
   }
-  isLoggedIn$: Observable<boolean>;
 
 }

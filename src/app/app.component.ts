@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Admin } from './Model/admin';
 import { AdminService } from './Services/admin.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { AdminService } from './Services/admin.service';
 export class AppComponent {
   title = 'Zonions';
   isLoggedIn$: Observable<boolean>;
-
+  admin: Admin;
   constructor(private adminService: AdminService, private router: Router) { }
 
   ngOnInit() {

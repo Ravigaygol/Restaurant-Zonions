@@ -2,7 +2,6 @@
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item" *ngIf="isLoggedIn$ | async as isLoggedIn;else login">
-      <!-- <a style="color: rgb(255, 251, 7);" routerLink="adminLogin" class="nav-link" routerLinkActive="active"></a>-->
       <button style="font-weight: bolder;margin-left: 1200px" (click)="onLogout()" *ngIf="isLoggedIn"
         class="btn btn-light">Logout</button>
     </li>
@@ -13,11 +12,12 @@
     </li>
   </ul>
 </nav>
-<div class="container"  [ngStyle]="{backgroundImage:'url(./assets/Rest3.jpg)'}">
+<div class="container" [ngStyle]="{backgroundImage:'url(./assets/Rest3.jpg)'}">
   <br>
   <h1
     style="text-align: center;color: rgb(92, 52, 4);background-color: rgb(247, 209, 134);font-family:'Courier New', Courier, monospace;font: bolder;">
-    <u>{{title}}</u></h1>
+    <u>{{title}}</u>
+  </h1>
   <hr>
   <div class="card">
     <div class="card-body">

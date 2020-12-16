@@ -13,10 +13,7 @@ export class AdminService {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public loginAdminFromRemote(admin:Admin):Observable<any>
   {
-    console.log("In admin service :"+admin.username);
-    console.log("In admin service :"+admin.password);
     this.loggedIn.next(true);
-/*     return this._http.post("http://localhost:8080/loginadmin",{"username":admin.username,"password":admin.password}); */
       return this._http.post("http://localhost:8080/loginadmin",admin);
 }
 

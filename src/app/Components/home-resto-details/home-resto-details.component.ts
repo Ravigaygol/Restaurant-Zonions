@@ -11,34 +11,19 @@ import { RestaurantService } from 'src/app/Services/restaurant.service';
 })
 export class HomeRestoDetailsComponent implements OnInit {
   restaurants: Observable<Restaurant[]>;
-  rest=new Restaurant();
+  rest = new Restaurant();
+
   constructor(private restaurantService: RestaurantService,
-    private router: Router) {}
+    private router: Router) { }
+
   ngOnInit() {
-    this.reloadData();
+    this.getRestaurantList();
   }
 
-  reloadData() {
+  getRestaurantList() { /* Method getting all the active restaurants */
     this.restaurants = this.restaurantService.getAllRestaurant();
   }
-
-  deleteRestaurant(restid: number) {
-    console.log("Delete restid :"+restid)
-    this.restaurantService.deleteRestaurant(restid)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log(error));
-  }
-/* 
-  restaurantDetails(restid: number){
-    this.router.navigate(['restDetails', restid]);
-  }
- */
-  restaurantDetails(restid: number){
-    console.log("Update restID :"+restid);
+  restaurantDetails(restid: number) {
     this.router.navigate(['restDetails', restid]);
   }
 

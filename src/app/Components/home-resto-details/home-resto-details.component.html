@@ -1,23 +1,27 @@
 <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h2>Restaurant List</h2>
-    </div>
-    <div class="panel-body">
-      <table class="table" >
-        <thead>
-          <tr class="danger">
-            <th  style="font-size: 20px;"><u>Restaurant Name</u></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let rest of restaurants | async">
-            <td style="font:bolder;font-size: 20px;background-color: rgb(236, 234, 231);">{{rest.restname}}</td>
+  <!------------------------Here Display the All Active Restaurants List to End User for getting the details -------------->
+  <div class="panel-heading">
+    <h2>Restaurant List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr class="danger">
+          <th style="font-size: 20px;"><u>Restaurant Name</u></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let rest of restaurants | async">
+          <tr *ngIf="rest.active==true">
+            <td style="font:bolder;font-size: 20px;">{{rest.restname}}</td>
             <td>
-                <button (click)="restaurantDetails(rest.restid)" class="btn btn-info" style="margin-left: 400px">Restaurant Details</button>
+              <button (click)="restaurantDetails(rest.restid)" class="btn btn-info"
+                style="margin-left: 400px">Restaurant
+                Details</button> <!-- Show all Restaurants Details -->
             </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
-  
+</div>

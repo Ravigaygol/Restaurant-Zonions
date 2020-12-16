@@ -10,9 +10,9 @@ import { RestaurantService } from 'src/app/Services/restaurant.service';
 })
 export class CreateRestaurantComponent implements OnInit {
   restaurant: Restaurant = new Restaurant();
-  rest=Restaurant;
+  rest = Restaurant;
   submitted = false;
-  constructor(private  restaurantservice: RestaurantService,
+  constructor(private restaurantservice: RestaurantService,
     private router: Router) { }
 
   ngOnInit() {
@@ -23,24 +23,23 @@ export class CreateRestaurantComponent implements OnInit {
     this.restaurant = new Restaurant();
   }
 
-  save() {
+  save() {                    /* <---Actual method for registration(Which call service method) to save Restaurant */
     this.restaurantservice
-    .createRestaurant(this.restaurant).subscribe(data => {
-      console.log(data)
-      this.restaurant = new Restaurant();
-      this.gotoList();
-    }, 
-    error => console.log(error));
+      .createRestaurant(this.restaurant).subscribe(data => {
+        console.log(data)
+        this.restaurant = new Restaurant();
+        this.refreshRestaurants();
+      },
+        error => console.log(error));
   }
 
-  onSubmit() {
+  createRestaurant() {        /* <---Method call from Registration Form */
     this.submitted = true;
-    this.save();    
+    this.save();
   }
 
-  gotoList() {
+  refreshRestaurants() {       /* <---Method to display the all restaurants again after addition of new restaurant */
     this.router.navigate(['restaurant']);
   }
- time={hour:14,minute:30};
 
 }

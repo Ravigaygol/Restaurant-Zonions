@@ -1,17 +1,21 @@
 <div class="container">
     <h2>Login form</h2>
     <form #loginform="ngForm" (ngSubmit)="loginAdmin()">
- <!--        {{loginform.form.valid}}--> 
-       <small class="text-danger">{{msg}}</small>
+
+        <small class="text-danger">{{msg}}</small>
+        <!------------------------------ Field Of Username For Admin Login----------------------------->
         <div class="form-group">
             <label for="username">* Username:</label>
-            <input type="text" class="form-control" placeholder="Enter Username" name="username" [(ngModel)]="Admin.username" required pattern="[A-Za-z ]{1,10}"
-                required #username="ngModel" [class.is-invalid]="username.invalid && username.touched">
-        <div *ngIf="username.errors && username.invalid && username.touched">
-            <small class="text-danger" *ngIf="username.errors.required">Username is Required field</small>
-            <small class="text-danger" *ngIf="username.errors.pattern">Enter valid Username</small>
+            <input type="text" class="form-control" placeholder="Enter Username" name="username"
+                [(ngModel)]="Admin.username" required pattern="[A-Za-z ]{1,10}" required #username="ngModel"
+                [class.is-invalid]="username.invalid && username.touched">
+            <div *ngIf="username.errors && username.invalid && username.touched">
+                <small class="text-danger" *ngIf="username.errors.required">Username is Required field</small>
+                <small class="text-danger" *ngIf="username.errors.pattern">Enter valid Username</small>
+            </div>
         </div>
-        </div>
+
+        <!------------------------------ Field Of Password For Admin Login----------------------------->
         <div class="form-group">
             <label for="pwd">* Password:</label>
             <input type="password" class="form-control" placeholder="Enter password" name="password"
@@ -25,6 +29,6 @@
                 <input class="form-check-input" type="checkbox" name="remember"> Remember me
             </label>
         </div>
-        <button [disabled]="loginform.form.invalid" type="submit"  class="btn btn-dark">Login</button>
+        <button [disabled]="loginform.form.invalid" type="submit" class="btn btn-dark">Login</button>
     </form>
 </div>
